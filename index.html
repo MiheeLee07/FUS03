@@ -12,18 +12,32 @@
 <body>
     <header class="header">
         <h1 class="logo">
+            <!-- h1의 로고. 이름을 붙여준 것.  -->
             <a href="#"></a>
+            <!-- a : 앵커 태그. 링크를 걸 수 있음. -->
             <img src="images/logo.png" alt="web cafe">
         </h1>
         <nav class="navigation" aria-label="메인 메뉴">
-
+            <!-- 메인메뉴를 만들기로 결정! nav태그로 만들기~! 그럼 메뉴는 이미지로 쓸거야 텍스트로 쓸거야? 정해야 함. -->
+            <!-- div.menubar-container -->
+            <div class="menubar-container">
+                <!-- button.but-menubar -->
+                <button class="btn-menubar">메인 메뉴 보기</button>
+                <!-- span.menubar.menubar$*3 $*3은 3개를 만들겠다는거. $는 연산-->
+                <span class="menubar menubar-top"></span>
+                <span class="menubar menubar-middle"></span>
+                <span class="menubar menubar-bottom"></span>
+            </div>
+            <!-- 메뉴바 컨테이너 안에 버튼과 스팬이 들어가야 함! 자식관계로 들어가야함. -->
             <ul class="main-menu">
+                <!-- 각 메뉴들은 독립된 항목들임. 그럼 이걸 어떻게 나타낼 수 있을가? li태그로. 독립적으로 쓸 수는 없고 ul, ol 부모가 필요함.  -->
                 <li><a href="#">갤러리</a></li>
                 <li><a href="#">게시판</a></li>
                 <li><a href="#">소식</a></li>
                 <li><a href="#">새소식</a></li>
             </ul>
         </nav>
+        <!-- 그럼 메뉴 아이콘 on/off는 어떻게 시키지? <button>와 <input type>으로 가능. 이런 컨트롤 요소는 메인 메뉴 항목 전에 등장해야겠지? -->
         <form action="javascript:alert('검색이 완료되었습니다.');" class="search-form">
             <fieldset>
                 <legend>검색 폼</legend>
@@ -34,6 +48,15 @@
     </header>
     <main class="content">콘텐츠</main>
     <footer class="footer">푸터</footer>
+    <!-- script -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="js/webcafe.js">
+    </script>
+    <!-- 스크립트를 연결하는 코드, 이 경우 링크가 아닌 소스로 불러온다. 스크립트 기반의 라이브러리인 제이쿼리를 쓸 경우...
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>  이런 코드를 앞에 넣어주면 됨.-->
 </body>
 
 </html>

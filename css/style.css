@@ -2,6 +2,17 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css';
 @import 'fonts.css';
 
+/* Box-Sizing 기본값 변경 */
+
+*,
+*::before,
+*::after {
+    /* *콤마 요거는 여러 명령어를 한번에 처리하고 싶을 때.  */
+    box-sizing: border-box;
+    /* 기본값은 컨텐츠박스지만 border-box를 선언하면 보더값에 패딩이랑 width값이 포함되서 계산됨. */
+}
+
+
 /* 링크 스타일  */
 
 a {
@@ -25,6 +36,8 @@ body {
 .header {
     background: #432219;
     padding: 2rem;
+    position: relative;
+    /* 메뉴바-컨테이너에서 메인메뉴를 제어하려면 속성이 스테끼만 아니면 됨. 우리는 relative를 사용할거얌. 이건 움직일 준비, ready가 되었다는 뜻. 아무런 옵션값을 주지 않으면 실제로 움직이진 않음. */
 }
 
 
@@ -35,6 +48,62 @@ body {
 }
 
 
+/* 메인 메뉴 제어 버튼 */
+
+.menubar-container {
+    background: yellow;
+    /* 뭘 선택할건지 이름을 불러줘야겠지. 나는 메뉴바-컨테이너. 잘 선택했는지 궁금하면 배경색을 칠해보면됨.  */
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    /* 이 레이어의 배치 위치는 상단 오른쪽 끝. 여백값은 2rem을 갖는다. */
+    width: 40px;
+    height: 40px;
+}
+
+.btn-menubar {
+    border: 0;
+    margin: 0;
+    padding: 40px 0 0 0;
+    width: 40px;
+    height: 40px;
+    background: red;
+    overflow: hidden;
+    /* 40px넘는 컨텐츠는 감춰주세요. IR기법.  */
+    cursor: pointer;
+    /* 커서 올리면 손모양 되는거 */
+}
+
+.menubar {
+    /* display: block; */
+    /* 디스플레이 속성의 값을 블록으로. */
+    /* w100% */
+    width: 100%;
+    height: 5px;
+    background: #fff;
+    /* margin-bottom: 5px; */
+    border-radius: 5px;
+    /* 모서리 둥근 값. 각 모서리를 다른 픽셀로 주고 싶으면 시계방향으로 4번 값을 주면 됨. 왼쪽 위, 오른쪽 위, 오른쪽 아래, 왼쪽 아래. */
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+}
+
+.menubar-top {
+    top: 0;
+}
+
+.menubar-middle {
+    top: 50%;
+    transform: translateY(-50%);
+    /* 움직이고 싶을 때. 2d 함수. 음수값을 주면 올라가고 양수값은 내려감. %주면 자기가 가진 위치값을 기준으로 움직임.*/
+}
+
+.menubar-bottom {
+    bottom: 0;
+}
+
+
 /* 메인메뉴  */
 
 .main-menu {
@@ -42,4 +111,77 @@ body {
     margin: 0;
     padding: 0;
     color: #fff;
+    display: none;
+    height: 0;
+    overflow: hidden;
+    /*디스플레이: 플렉스는 기본값이 가로형. (메인메뉴 배치) */
+    flex-direction: row;
+    /* flex-direction을 굳이 주지 않아도 기본값이 row기 때문에 가로로 표현됨. */
+    flex-wrap: nowrap;
+    display: flex;
+    transition: height 0.5s, color 2s 0.5s;
+    /*디스플레이의 전위과정을 2초동안 보여주겠다. 근데 논과 플렉스는 중간단계가 없음. 그래서 중간단계를 만들어줘야함.결국
+    높이를 조정해서 전위효과를 만들어줘얗야함. */
+    /*세번째 숫자는 딜레이 되는 시간이다. 즉, 0.5초 후에 컬러가 2초동안 변화하겠다는 의미. 순차적인 애니메이션을 원할 경우 애니메이션 시나리오를 짜면 됨! 그리고 거기에 맞는 css속성을 붙이면 됨. 
+    그리고 순차적이지 않고 모두 동일한 시간동안 애니메잍 되길 원하면 transition: all 0.5s 이런식으로 주면 됨.*/
 }
+
+.main-menu-act {
+    /* 이 코드가 추가되는 순간 디스플레이는 none이 되어야 한다. 순서도 중요한데, act가 메인메뉴보다 아래에 선언되는 이유는, 순서상 아래에 선언된 명령어가 최종 선언되기 때문.
+    다만 이 규칙은 서로간의 점수가 동등할 때만 적용되는데, 보통 ul은 1점, .main어쩌구는 10점, #nav는 1000점 이런 식. 때문에 act를 메인메뉴보다 앞에 쓰고 싶으면 앞에 ul.main-menu-act 이런식으로 앞에 ul을 붙여주면 총합이 11점이 되면서 메인메뉴(10점)보다 넘게 되므로 우선 적용된다.
+    그런데 간단하게 display: block !important; 임폴턴트 선언을 해주면 우선 적용된다....점수고 뭐고 그냥 무조건 우선된다!*/
+    height: 50px !important;
+    color: blue;
+}
+
+.main-menu li {
+    /* li인데 어떤 li를 선택할건지 범위를 좁혀 선택 */
+    width: 25%;
+    /* list가 4개니까 하나당 25면 다 차면 100이겠지. */
+    /* border: 10px solid #000; <-box사이징 확인하려고 넣은 코드였음.*/
+    /* border는 테두리라는 뜻. 그런데 이슈가 발생. 보더값 때문에 내가 선택한 박스사이즈+보더값 = 플러스 사이즈가 나옴. 플렉스 박스는 이런 이슈를 해결. */
+    /* 쇼텐드, 단축표기법 */
+    font-size: 2rem;
+    /* 디폴트값이 html은 10px. 3rem이면 10*3px. */
+    text-align: center;
+    /* 텍스트 정렬 */
+    font-family: 'Noto Sans Bold';
+    padding: 1rem 0;
+    /* 안쪽 여백, 값을 한번 주면 위 아래, 두번 주면 양 옆, 세번주면 위아래 오른쪽, 네번주면 위아래오른쪽왼쪽 */
+}
+
+
+/* offCanvas 방식 */
+
+
+/* 
+.main-menu {
+    list-style: none;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    left: -10rem;
+    top: 0;
+    margin: 0;
+    width: 0;
+    overflow: hidden;
+    height: 100vh;
+    font-size: 2rem;
+    padding: 5rem;
+    font-family: 'Noto Sans Bold', sans-serif;
+    transition: all 0.5s;
+}
+
+.main-menu-act {
+    left: 0;
+    width: 70vw;
+}
+
+.main-menu li {
+    margin-bottom: 2rem;
+}
+
+.main-menu a {
+    background: blue;
+    display: block;
+} */
