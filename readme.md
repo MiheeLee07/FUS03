@@ -19,5 +19,5 @@
     transition: height 0.5s, color 2s 0.5s;
 }
 ```
-[생활코딩][coding]
-[coding]:https://opentutorials.org/course/1 "생활코딩 사이트롱 이동"
+link: [생활코딩][coding]
+[coding]: https://opentutorials.org/course/1 "생활코딩 사이트로 이동"
