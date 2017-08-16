@@ -18,6 +18,8 @@
             <img src="images/logo.png" alt="web cafe">
         </h1>
         <nav class="navigation" aria-label="메인 메뉴">
+            <!-- <h2 class="readable-hidden">메인 메뉴</h2> h2는 중제목. h1은 대제목-->
+            <!-- 원래 나브, 어사이드, 아티클, ....는 제목을 가져야 함. 그래서 h2...메인메뉴..라고 쓰면 화면에 보임. 그래서 가리고싶은데 귀찮으니까 그냥 aria-label을 쓴건데, 만약 제목을 준다면 readable-hidden, 혹은 a11(숫자 11)y-hidden 코드를 써주면 됨! 네이버나 다음에 가서 헤딩맵을 살펴보면 도움. 결국 IA, 정보설계 아키텍쳐 짜는 거임. -->
             <!-- 메인메뉴를 만들기로 결정! nav태그로 만들기~! 그럼 메뉴는 이미지로 쓸거야 텍스트로 쓸거야? 정해야 함. -->
             <!-- div.menubar-container -->
             <div class="menubar-container">
@@ -46,7 +48,26 @@
             </fieldset>
         </form>
     </header>
-    <main class="content">콘텐츠</main>
+
+    <main class="content">
+        <section class="book">
+            <h2 class="subject book-subject">
+                <a href="#">웹카페 서적<span class="en-subject">WebCafe Book</span></a>
+            </h2>
+            <div class="book-cover">
+                <img src="images/book_html5.jpg" alt="웹표준 핵심 가이드북 HTML5+CSS3" title="책에 대한 상세 설명은 하단 내용 참조">
+            </div>
+            <dl class="book-detail">
+                <dt class="readable-hidden">도서명</dt>
+                <dd class="book-heading">웹표준 핵심가이드북 HTML5+CSS3</dd>
+                <dt class="book-author">저자</dt>
+                <dd class="book-author-name">김데레사</dd>
+                <dt class="readable-hidden">평점</dt>
+                <dd class="book-grade" aria-label="5점 만점에 5점"></dd>
+            </dl>
+            <p class="book-summary">HTML5와 CSS3의 최신 스펙이 쉽고 체계적으로 정리되어 있으며 차세대 표준기술을 실전에 어떻게 적용할 수 있는지를 소개하고 있다. 특히 웹접근성 향상을 위해 오류 진단부터 수정까지의 프로세스를 실무 예제를 통해 익힐 수 있도록 하였다.</p>
+        </section>
+    </main>
     <footer class="footer">푸터</footer>
     <!-- script -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

@@ -13,10 +13,28 @@
 }
 
 
+/* 숨김 콘텐츠 */
+
+legend,
+.readable-hidden {
+    background: yellow;
+    position: absolute;
+    left: -9999em;
+    /* 요 코드의 특징은 레이어가 독립적 위치를 갖게 함. 그러면서 영역을 갖게 하지 않음. 붕 뜬 것과 같음. 그래서 얘를 큰 수치를 넣어서 화면 밖으로 밀어버리면 보이지 않게 되겠찌!ㅎㅎ*/
+    font-size: 0;
+    line-height: 0;
+    width: 1px;
+    margin: -1px 0 0 -1px;
+    overflow: hidden;
+    /* 폰트~오버플로우 까지의 폰트는 시각적으로 보이진 않는다. 다만 접근성을 고려해 기계적인 부분까지 고려해 코드를 짤 경우를 보여준 것. */
+}
+
+
 /* 링크 스타일  */
 
 a {
     color: inherit;
+    text-decoration: none;
 }
 
 html {
@@ -51,7 +69,6 @@ body {
 /* 메인 메뉴 제어 버튼 */
 
 .menubar-container {
-    background: yellow;
     /* 뭘 선택할건지 이름을 불러줘야겠지. 나는 메뉴바-컨테이너. 잘 선택했는지 궁금하면 배경색을 칠해보면됨.  */
     position: absolute;
     top: 2rem;
@@ -59,15 +76,17 @@ body {
     /* 이 레이어의 배치 위치는 상단 오른쪽 끝. 여백값은 2rem을 갖는다. */
     width: 40px;
     height: 40px;
+    overflow: hidden;
 }
 
 .btn-menubar {
+    outline: 5px solid blue;
     border: 0;
     margin: 0;
     padding: 40px 0 0 0;
     width: 40px;
     height: 40px;
-    background: red;
+    background: transparent;
     overflow: hidden;
     /* 40px넘는 컨텐츠는 감춰주세요. IR기법.  */
     cursor: pointer;
@@ -87,10 +106,17 @@ body {
     position: absolute;
     left: 0;
     cursor: pointer;
+    transition: all 0.2s;
 }
 
 .menubar-top {
     top: 0;
+}
+
+.menubar-act .menubar-top {
+    top: 50%;
+    transform: rotate(45deg)
+    /* translateY50%은 자기자신 값의 50퍼센트라는 뜻. 100이면 100 */
 }
 
 .menubar-middle {
@@ -99,62 +125,26 @@ body {
     /* 움직이고 싶을 때. 2d 함수. 음수값을 주면 올라가고 양수값은 내려감. %주면 자기가 가진 위치값을 기준으로 움직임.*/
 }
 
+.menubar-act .menubar-middle {
+    /* 가운데 사이띄움을 주는건 act가 들어갈때만 동작하라는 뜻. */
+    transform: translate(-100%, -50%);
+}
+
 .menubar-bottom {
     bottom: 0;
+}
+
+.menubar-act .menubar-bottom {
+    top: 50%;
+    transform: rotate(-45deg)
 }
 
 
 /* 메인메뉴  */
 
-.main-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    display: none;
-    height: 0;
-    overflow: hidden;
-    /*디스플레이: 플렉스는 기본값이 가로형. (메인메뉴 배치) */
-    flex-direction: row;
-    /* flex-direction을 굳이 주지 않아도 기본값이 row기 때문에 가로로 표현됨. */
-    flex-wrap: nowrap;
-    display: flex;
-    transition: height 0.5s, color 2s 0.5s;
-    /*디스플레이의 전위과정을 2초동안 보여주겠다. 근데 논과 플렉스는 중간단계가 없음. 그래서 중간단계를 만들어줘야함.결국
-    높이를 조정해서 전위효과를 만들어줘얗야함. */
-    /*세번째 숫자는 딜레이 되는 시간이다. 즉, 0.5초 후에 컬러가 2초동안 변화하겠다는 의미. 순차적인 애니메이션을 원할 경우 애니메이션 시나리오를 짜면 됨! 그리고 거기에 맞는 css속성을 붙이면 됨. 
-    그리고 순차적이지 않고 모두 동일한 시간동안 애니메잍 되길 원하면 transition: all 0.5s 이런식으로 주면 됨.*/
-}
-
-.main-menu-act {
-    /* 이 코드가 추가되는 순간 디스플레이는 none이 되어야 한다. 순서도 중요한데, act가 메인메뉴보다 아래에 선언되는 이유는, 순서상 아래에 선언된 명령어가 최종 선언되기 때문.
-    다만 이 규칙은 서로간의 점수가 동등할 때만 적용되는데, 보통 ul은 1점, .main어쩌구는 10점, #nav는 1000점 이런 식. 때문에 act를 메인메뉴보다 앞에 쓰고 싶으면 앞에 ul.main-menu-act 이런식으로 앞에 ul을 붙여주면 총합이 11점이 되면서 메인메뉴(10점)보다 넘게 되므로 우선 적용된다.
-    그런데 간단하게 display: block !important; 임폴턴트 선언을 해주면 우선 적용된다....점수고 뭐고 그냥 무조건 우선된다!*/
-    height: 50px !important;
-    color: blue;
-}
-
-.main-menu li {
-    /* li인데 어떤 li를 선택할건지 범위를 좁혀 선택 */
-    width: 25%;
-    /* list가 4개니까 하나당 25면 다 차면 100이겠지. */
-    /* border: 10px solid #000; <-box사이징 확인하려고 넣은 코드였음.*/
-    /* border는 테두리라는 뜻. 그런데 이슈가 발생. 보더값 때문에 내가 선택한 박스사이즈+보더값 = 플러스 사이즈가 나옴. 플렉스 박스는 이런 이슈를 해결. */
-    /* 쇼텐드, 단축표기법 */
-    font-size: 2rem;
-    /* 디폴트값이 html은 10px. 3rem이면 10*3px. */
-    text-align: center;
-    /* 텍스트 정렬 */
-    font-family: 'Noto Sans Bold';
-    padding: 1rem 0;
-    /* 안쪽 여백, 값을 한번 주면 위 아래, 두번 주면 양 옆, 세번주면 위아래 오른쪽, 네번주면 위아래오른쪽왼쪽 */
-}
-
 
 /* offCanvas 방식 */
 
-
-/* 
 .main-menu {
     list-style: none;
     color: #fff;
@@ -182,6 +172,115 @@ body {
 }
 
 .main-menu a {
-    background: blue;
     display: block;
-} */
+}
+
+
+/* 검색 폼 */
+
+.search-form {
+    margin: top 2rem;
+}
+
+.search-form fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.search-form input[type='search'] {
+    border: 1px solid #aaa;
+    padding: 5px 1px 1px 5px;
+    margin: 0;
+    width: calc(100% - 45px);
+    /* 연산 함수. 반응형 디자인의 기본. 고정된 값이 아니라 백분율 값을 사용하면 됨.*/
+    height: 35px;
+    /* 브라우저마다 단위를 지원하는게 조금씩 다를 수 있음. 사파리의 경우 rem단위 지원이 완벽하지 않아서 가끔 깜박거리거나 제대로 적용되지 않는 이슈가 발생하기도 함. 그럴 떈 단위를 바꿔보면..해결! */
+    border-radius: 5px;
+    vertical-align: middle;
+    /* 중요!!!! box-sizing: border 이거 안주면 박스 사이즈 안에 보더랑 패딩값이 포함되지 않아 생각보다 박스가 커진당 */
+    /* solid는 실선 */
+}
+
+.search-form input[type='image'] {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    /* 버티컬 얼라인, 정렬값 */
+    /* input 선택할때 근데 생각해보면 input이 두개임! 클래스 속성을 쓰지 않고 해결하는 방법은, input[type='image']타입 속성 까지 선택해주면 됨! */
+}
+
+
+/* 메인 콘텐츠 */
+
+.content {
+    padding: 2rem;
+}
+
+
+/* 웹카페 서적 */
+
+.book {
+    background: pink;
+}
+
+.subject {
+    height: 60px;
+    background: skyblue url('images/sprite_main.png') no-repeat;
+    /* no-repeat 배경 반복되지 않음. 없으면 반복이 기본값 */
+    padding-left: 70px;
+    font-size: 2rem;
+}
+
+.en-subject {
+    display: block;
+    margin-top: 0.5rem;
+    /* 마진은 세로방향으로 만났을 때 투명하기 때문에 서로 병합되는 특성이 있다. 패딩은 병합되지 않는다. 준 값만큼 플러스 되서 표현됨. */
+}
+
+.book-subject {
+    background-position: 0 0;
+}
+
+.book-subject .en-subject {
+    color: #abd375;
+}
+
+.book-cover {
+    margin: 1rem auto;
+    /* auto마진 */
+    width: 60%;
+    text-align: center;
+}
+
+.book-cover img {
+    max-width: 100%;
+    /* 원본보다 더이상 (max) 커지지 마라는 의미. 그냥 width값으로 주면 브라우저 화면이 커지면 이미지도 계속 같이 커짐. */
+    height: auto;
+}
+
+.book-detail {
+    text-align: center;
+}
+
+.book-heading,
+.book-author-name,
+.book-grade {
+    margin: 0;
+}
+
+.book-grade::before {
+    color: #afd371;
+    content: "★★★★★";
+    font-size: 2.5rem;
+    /* before나 after는 가짜 컨텐츠를 만들어주는 요소. 이건 블록에도 안잡힘. 즉 장식용 컨텐츠 만들때 유용.*/
+}
+
+.book-summary {
+    line-height: 1.5;
+}
+
+.book-author,
+.book-author-name {
+    display: inline-block;
+}
