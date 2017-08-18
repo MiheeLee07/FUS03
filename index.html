@@ -67,8 +67,69 @@
             </dl>
             <p class="book-summary">HTML5와 CSS3의 최신 스펙이 쉽고 체계적으로 정리되어 있으며 차세대 표준기술을 실전에 어떻게 적용할 수 있는지를 소개하고 있다. 특히 웹접근성 향상을 위해 오류 진단부터 수정까지의 프로세스를 실무 예제를 통해 익힐 수 있도록 하였다.</p>
         </section>
+        <section class="qna">
+            <h2 class="subject qna-subject">
+                <!-- ㅇ이름이 두개인 이유는 전자는 공통요소 적용 시 쓰고 후자는 해당 요소에만 적용하고시픙ㄹ때 쓰려고 -->
+                <a href="#">웹카페 묻고 답하기 <span class="en-subject">Question &amp; Answer</span></a>
+            </h2>
+            <ul class="qna-list">
+                <li><a href="#">반응형웹의 모든 것을 알려주마 샘플을 구해주세요.</a> <time datetime="2017-08-18">2017.8.18</time></li>
+                <li><a href="#">W3C 사이트의 주소를 알려주실 수 없을까요?</a> <time datetime="2017-08-18">2017.8.18</time></li>
+                <li><a href="#">HTML5 &amp; CSS3 &amp; jQuery 팁 링크 좀</a> <time datetime="2017-08-18">2017.8.18</time></li>
+                <li><a href="#">RWD 소스 많은 곳 공유 좀 부탁드립니다.</a> <time datetime="2017-08-18">2017.8.18</time></li>
+                <li><a href="#">반응형 웹을 공부하려고 합니다. 책 추천 부탁드려요.</a> <time datetime="2017-08-18">2017.8.18</time></li>
+                <li><a href="#">웹접근성 어떠하게 시작해야 할지 막막해요.</a> <time datetime="2017-08-18">2017.8.18</time></li>
+            </ul>
+        </section>
+        <article class="news">
+            <h2 class="subject news-subject">
+                <a href="#">웹카페 소식 <span class="en-subject">WebCafe News</span></a>
+            </h2>
+            <video class="news-video" controls poster="media/poster.jpg" preload="none" width="640" height="360">
+                        <source src="media/google-developer-stories.webm" type='video/webm; codecs="vp8, vorbis"'>
+                        <track src="media/video-subtitles-en.vtt" kind="captions" srclang="en" label="English captions" default>
+                    </video>
+            <p class="news-summary">반응형 웹 핵심가이드 북 출판을 기념하여 저자의 강의가 있었습니다. 많은 분들이 강의에 참석을 해주셨으며 반응형 웹에대한 많은 이야기를 나눌 수 있는 소중한 시간이었습니다.</p>
+            <time datetime="2017-08-18" class="news-date">2017.08.17</time>
+        </article>
+        <section class="favorite-keyword">
+            <h2 class="subject favorite-keyword-subject">
+                <a href="#">인기 검색어<span class="en-subject">Favorite Keyword</span></a>
+            </h2>
+            <ol class="favorite-keyword-list">
+                <li>
+                    <span class="keyword-wrap"><span class="no1">반응형 웹</span></span>
+                </li>
+                <li>
+                    <span class="keyword-wrap"><span class="no2">웹 접근성</span></span>
+                </li>
+                <li>
+                    <span class="keyword-wrap"><span class="no3">HTML5</span></span>
+                </li>
+                <li>
+                    <span class="keyword-wrap"><span class="no4">CSS3</span></span>
+                </li>
+                <li>
+                    <span class="keyword-wrap"><span class="no5">웹 표준</span></span>
+                </li>
+            </ol>
+        </section>
     </main>
-    <footer class="footer">푸터</footer>
+    <footer class="footer">
+        <address>서울시 마포구 상수동 123-1번지 한주빌딩 5층</address>
+        <ul class="guide">
+            <li><a href="#">개인정보 보호정책</a></li>
+            <li><a href="#">이메일주소 무단수집거부</a></li>
+            <li><a href="#">CONTACT US</a></li>
+            <li><a href="#">SITE MAP</a></li>
+        </ul>
+        <div class="copyright">copyright &copy; 2017 WebCafe. All Rights Reserved.</div>
+        <!-- 특수문자 쓸 때...&copy 식의 특수문자 코드를 따로 써줘야 한다. &euro, &yen 등등 -->
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="js/webcafe.js"></script>
+    </footer>
+
     <!-- script -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="js/webcafe.js">
@@ -77,7 +138,8 @@
     <script
 			  src="https://code.jquery.com/jquery-3.2.1.min.js"
 			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-			  crossorigin="anonymous"></script>  이런 코드를 앞에 넣어주면 됨.-->
+              crossorigin="anonymous"></script>  이런 코드를 앞에 넣어주면 됨.-->
+
 </body>
 
 </html>

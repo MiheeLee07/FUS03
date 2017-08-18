@@ -7,7 +7,6 @@ $(function() {
     var container = button_span.parent();
     var main_menu = button_span.parent().siblings();
     var last_menu = $('.main-menu li:last-child a');
-    var menu_form = $('.meun-form');
     // 메인메뉴에서 li를 찾고, 그 다음 가장 마지막 자식을 찾아서 호출하라는 의미.
     // 가장 먼저 할 일은 지금 있는 돔 구조에서 클릭할 대상을 선택하는 것. 선택하는 방식은 css와 거의 흡사
     // $('.btn-menubar').on('click', function() {
@@ -29,11 +28,10 @@ $(function() {
     });
     last_menu.on('focusout', function() {
         main_menu.toggleClass('main-menu-act');
+        container.toggleClass('main-menu-act');
         // focusout이 발생하면 펑션을 실행하라. 펑션은 메인메뉴.토글클래스...어쩌구 다.
     });
-    meun_form.on('focusin', function() {
-        main_menu.toggleClass('main-menu-act');
-    });
+
     //  $('.menubar').on('click', function() {
     // on메소드 대신 click메소드를 써도 됨. click(f)로 써도 되지만 click은 클릭만 가능하지만, on메소드는 여러개에 동시에 걸 수 있다. 예를 들어 on(click, focusin)라고 쓰면 클릭하거나, 혹은 포커스 인 되면 구동하라는 뜻. 
     // $(this).parent().siblings().toggleClass('main-menu-act');
